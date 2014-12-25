@@ -1,0 +1,15 @@
+C:\Users\Administrator\Documents\Visual Studio 2010\Projects\PagosPDF\bin\Debug\PagosPDF.exe
+C:\Users\Administrator\Documents\Visual Studio 2010\Projects\PagosPDF\bin\Debug\PagosPDF.pdb
+C:\Users\Administrator\Documents\Visual Studio 2010\Projects\PagosPDF\obj\x86\Debug\PagosPDF.Properties.Resources.resources
+C:\Users\Administrator\Documents\Visual Studio 2010\Projects\PagosPDF\obj\x86\Debug\PagosPDF.csproj.GenerateResource.Cache
+C:\Users\Administrator\Documents\Visual Studio 2010\Projects\PagosPDF\obj\x86\Debug\PagosPDF.exe
+C:\Users\Administrator\Documents\Visual Studio 2010\Projects\PagosPDF\obj\x86\Debug\PagosPDF.pdb
+C:\Users\Administrator\Documents\Visual Studio 2010\Projects\PagosPDF\obj\x86\Debug\PagosPDF.frmPagos.resources
+\\vmware-host\Shared Folders\Parnet\PagosPDF\obj\x86\Debug\PagosPDF.exe
+\\vmware-host\Shared Folders\Parnet\PagosPDF\obj\x86\Debug\PagosPDF.pdb
+\\vmware-host\Shared Folders\Parnet\PagosPDF\bin\Debug\PagosPDF.exe
+\\vmware-host\Shared Folders\Parnet\PagosPDF\bin\Debug\PagosPDF.pdb
+\\vmware-host\Shared Folders\Parnet\PagosPDF\obj\x86\Debug\PagosPDF.csprojResolveAssemblyReference.cache
+\\vmware-host\Shared Folders\Parnet\PagosPDF\obj\x86\Debug\PagosPDF.frmPagos.resources
+\\vmware-host\Shared Folders\Parnet\PagosPDF\obj\x86\Debug\PagosPDF.Properties.Resources.resources
+\\vmware-host\Shared Folders\Parnet\PagosPDF\obj\x86\Debug\PagosPDF.csproj.GenerateResource.Cache
