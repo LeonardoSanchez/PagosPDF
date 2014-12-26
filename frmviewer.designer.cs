@@ -1,4 +1,4 @@
-﻿namespace ReporteVentasExistencias
+﻿namespace PagosPDF
 {
     partial class frmviewer
     {
@@ -42,6 +42,7 @@
             this.crviewer.Size = new System.Drawing.Size(396, 445);
             this.crviewer.TabIndex = 0;
             this.crviewer.ViewTimeSelectionFormula = "";
+            this.crviewer.Load += new System.EventHandler(this.crviewer_Load);
             // 
             // frmviewer
             // 
@@ -60,6 +61,8 @@
         #endregion
 
         public CrystalDecisions.Windows.Forms.CrystalReportViewer crviewer;
+
+
 
     }
 }
