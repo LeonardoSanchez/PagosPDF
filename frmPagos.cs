@@ -37,7 +37,7 @@ namespace PagosPDF
 
         private void btnGenerar_Click(object sender, EventArgs e)
         {
-            Pagos = CorePagos.ObtenerPagos(cmbNombres.SelectedItem.ToString());    
+            Pagos = CorePagos.ObtenerPagos(cmbNombres.Text);
         }
     }
 }

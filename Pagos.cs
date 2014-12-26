@@ -9,13 +9,12 @@ namespace PagosPDF
 {
     class Pagos
     {
-        string DatosConexion = "Data Source = localhost; Initial Catalog = OceanSAP; Integrated Security = true;";
+        string DatosConexion = "Data Source = localhost; Initial Catalog = LuxurySAPB1; Integrated Security = true;";
 
         public DataTable ObtenerNombres(string Fecha)
         {
             string Consulta = "SELECT WizardName FROM OPWZ WHERE PmntDate = @Fecha";
             DataTable DatosConsulta = new DataTable();
-            Console.WriteLine(Fecha);
             
             using (SqlConnection Conexion = new SqlConnection(DatosConexion))
             {
@@ -27,6 +26,8 @@ namespace PagosPDF
 
                 SqlDataAdapter Adapter = new SqlDataAdapter(cmdConsulta);
                 Adapter.Fill(DatosConsulta);
+                if (DatosConsulta.Rows.Count > 0)
+                    Console.WriteLine("Hay datos");
 
                 return DatosConsulta;
             }
