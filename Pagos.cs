@@ -9,7 +9,7 @@ namespace PagosPDF
 {
     class Pagos
     {
-        string DatosConexion = "Data Source = localhost; Initial Catalog = PROINCASA; Integrated Security = true;";
+        string DatosConexion = "Data Source = localhost; Initial Catalog = OceanSAP; Integrated Security = true;";
 
         public DataTable ObtenerNombres(string Fecha)
         {

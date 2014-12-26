@@ -12,6 +12,7 @@ namespace PagosPDF
     public partial class frmPagos : Form
     {
         Pagos CorePagos = new Pagos();
+        DataTable Pagos = new DataTable();
 
         public frmPagos()
         {
@@ -32,6 +33,11 @@ namespace PagosPDF
         private void frmPagos_Load(object sender, EventArgs e)
         {
             IniciaPantalla();
+        }
+
+        private void btnGenerar_Click(object sender, EventArgs e)
+        {
+            Pagos = CorePagos.ObtenerPagos(cmbNombres.SelectedItem.ToString());    
         }
     }
 }

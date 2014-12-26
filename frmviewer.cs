@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace PagosPDF
+namespace ReporteVentasExistencias
 {
-    public partial class fmrReporte : Form
+    public partial class frmviewer : Form
     {
-        public fmrReporte()
+        public frmviewer()
         {
             InitializeComponent();
         }

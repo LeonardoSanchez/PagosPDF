@@ -81,30 +81,31 @@
             this.opcionesItem});
             this.menuPrincipal.Location = new System.Drawing.Point(0, 0);
             this.menuPrincipal.Name = "menuPrincipal";
-            this.menuPrincipal.Size = new System.Drawing.Size(245, 24);
+            this.menuPrincipal.Size = new System.Drawing.Size(228, 24);
             this.menuPrincipal.TabIndex = 4;
             this.menuPrincipal.Text = "menuStrip1";
             // 
             // opcionesItem
             // 
             this.opcionesItem.Name = "opcionesItem";
-            this.opcionesItem.Size = new System.Drawing.Size(63, 20);
+            this.opcionesItem.Size = new System.Drawing.Size(69, 20);
             this.opcionesItem.Text = "Opciones";
             // 
             // btnGenerar
             // 
-            this.btnGenerar.Location = new System.Drawing.Point(84, 210);
+            this.btnGenerar.Location = new System.Drawing.Point(76, 210);
             this.btnGenerar.Name = "btnGenerar";
             this.btnGenerar.Size = new System.Drawing.Size(75, 23);
             this.btnGenerar.TabIndex = 5;
             this.btnGenerar.Text = "Generar";
             this.btnGenerar.UseVisualStyleBackColor = true;
+            this.btnGenerar.Click += new System.EventHandler(this.btnGenerar_Click);
             // 
             // frmPagos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(245, 245);
+            this.ClientSize = new System.Drawing.Size(228, 245);
             this.Controls.Add(this.btnGenerar);
             this.Controls.Add(this.cmbNombres);
             this.Controls.Add(this.lblNombres);
