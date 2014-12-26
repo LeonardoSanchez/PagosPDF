@@ -39,6 +39,7 @@ namespace PagosPDF
 
         private void btnGenerar_Click(object sender, EventArgs e)
         {
+<<<<<<< HEAD
             Pagos = CorePagos.ObtenerPagos(cmbNombres.SelectedItem.ToString());
 
 
@@ -85,6 +86,9 @@ namespace PagosPDF
                 MessageBox.Show(ex.ToString());
             }
 
+=======
+            Pagos = CorePagos.ObtenerPagos(cmbNombres.Text);
+>>>>>>> 65a6cd1998fef59e0fb151606c82bad17da007cc
         }
 
         private void SetDBLogonForReport(ConnectionInfo myConnectionInfo, ReportDocument myReportDocument)
