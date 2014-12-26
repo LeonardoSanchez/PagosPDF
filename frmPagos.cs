@@ -39,7 +39,7 @@ namespace PagosPDF
 
         private void btnGenerar_Click(object sender, EventArgs e)
         {
-<<<<<<< HEAD
+
             Pagos = CorePagos.ObtenerPagos(cmbNombres.SelectedItem.ToString());
 
 
@@ -53,14 +53,14 @@ namespace PagosPDF
             iConnectionInfo.Password = "12";
             iConnectionInfo.ServerName = "GERARDO-PC";
 
-            /*report.Load(System.IO.Directory.GetParent(Application.ExecutablePath).ToString() + @"\" +
-                (_tipodoc.Trim() == "13" ? "Ticket.rpt" : "TicketEntrega.rpt"));*/
+            report.Load(System.IO.Directory.GetParent(Application.ExecutablePath).ToString() + @"\" +
+                ("informe2.rpt"));
 
             //reasignando datos de conexión a reporte 
             SetDBLogonForReport(iConnectionInfo, report);
 
             //Asignando parametros de reporte
-            report.ParameterFields["DocEntry"].CurrentValues.AddValue("HOLA");
+           // report.ParameterFields["DocEntry"].CurrentValues.AddValue("HOLA");
 
             this.Cursor = Cursors.Default;
             //mostrando reporte
@@ -71,7 +71,7 @@ namespace PagosPDF
                 ExportOptions CrExportOptions;
                 DiskFileDestinationOptions CrDiskFileDestinationOptions = new DiskFileDestinationOptions();
                 PdfRtfWordFormatOptions CrFormatTypeOptions = new PdfRtfWordFormatOptions();
-                CrDiskFileDestinationOptions.DiskFileName = "c:\\REPORTE.pdf";
+                CrDiskFileDestinationOptions.DiskFileName = "c:/a/REPORTE.pdf";
                 CrExportOptions = report.ExportOptions;
                 {
                     CrExportOptions.ExportDestinationType = ExportDestinationType.DiskFile;
@@ -86,9 +86,8 @@ namespace PagosPDF
                 MessageBox.Show(ex.ToString());
             }
 
-=======
             Pagos = CorePagos.ObtenerPagos(cmbNombres.Text);
->>>>>>> 65a6cd1998fef59e0fb151606c82bad17da007cc
+
         }
 
         private void SetDBLogonForReport(ConnectionInfo myConnectionInfo, ReportDocument myReportDocument)
