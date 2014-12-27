@@ -32,4 +32,5 @@ C:\Users\Gerardo\Desktop\PagosPDF\obj\x86\Debug\PagosPDF.Properties.Resources.re
 C:\Users\Gerardo\Desktop\PagosPDF\obj\x86\Debug\PagosPDF.csproj.GenerateResource.Cache
 C:\Users\Gerardo\Desktop\PagosPDF\obj\x86\Debug\PagosPDF.exe
 C:\Users\Gerardo\Desktop\PagosPDF\obj\x86\Debug\PagosPDF.pdb
-C:\Users\Leonardo\Desktop\Parnet\PagosPDF\obj\x86\Debug\ReporteVentasExistencias.frmviewer.resources
+C:\Users\Leonardo\Desktop\Parnet\PagosPDF\obj\x86\Debug\PagosPDF.frmviewer.resources
+C:\Users\Leonardo\Desktop\Parnet\PagosPDF\obj\x86\Debug\PagosPDF.frmDBConfig.resources

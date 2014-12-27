@@ -34,8 +34,8 @@
             this.cmbNombres = new System.Windows.Forms.ComboBox();
             this.menuPrincipal = new System.Windows.Forms.MenuStrip();
             this.opcionesItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnGenerar = new System.Windows.Forms.Button();
             this.configuraciónToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnGenerar = new System.Windows.Forms.Button();
             this.menuPrincipal.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -94,6 +94,13 @@
             this.opcionesItem.Size = new System.Drawing.Size(69, 20);
             this.opcionesItem.Text = "Opciones";
             // 
+            // configuraciónToolStripMenuItem1
+            // 
+            this.configuraciónToolStripMenuItem1.Name = "configuraciónToolStripMenuItem1";
+            this.configuraciónToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.configuraciónToolStripMenuItem1.Text = "Base de Datos";
+            this.configuraciónToolStripMenuItem1.Click += new System.EventHandler(this.configuraciónToolStripMenuItem1_Click);
+            // 
             // btnGenerar
             // 
             this.btnGenerar.Location = new System.Drawing.Point(76, 160);
@@ -103,12 +110,6 @@
             this.btnGenerar.Text = "Generar";
             this.btnGenerar.UseVisualStyleBackColor = true;
             this.btnGenerar.Click += new System.EventHandler(this.btnGenerar_Click);
-            // 
-            // configuraciónToolStripMenuItem1
-            // 
-            this.configuraciónToolStripMenuItem1.Name = "configuraciónToolStripMenuItem1";
-            this.configuraciónToolStripMenuItem1.Size = new System.Drawing.Size(168, 22);
-            this.configuraciónToolStripMenuItem1.Text = "Configuración";
             // 
             // frmPagos
             // 

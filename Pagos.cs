@@ -26,8 +26,6 @@ namespace PagosPDF
 
                 SqlDataAdapter Adapter = new SqlDataAdapter(cmdConsulta);
                 Adapter.Fill(DatosConsulta);
-                if (DatosConsulta.Rows.Count > 0)
-                    Console.WriteLine("Hay datos");
 
                 return DatosConsulta;
             }

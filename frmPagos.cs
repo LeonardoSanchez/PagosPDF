@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Configuration;
 
 namespace PagosPDF
 {
@@ -35,68 +36,6 @@ namespace PagosPDF
         private void frmPagos_Load(object sender, EventArgs e)
         {
             IniciaPantalla();
-        }
-
-        private void btnGenerar_Click(object sender, EventArgs e)
-        {
-            string ruta;
-            SaveFileDialog save = new SaveFileDialog();
-            save.Filter = "PDF (*.pdf)|*.pdf";
-
-            if (save.ShowDialog() == System.Windows.Forms.DialogResult.OK
-                && save.FileName.Length > 0)
-            {
-                ruta = (save.FileName);
-
-
-                Pagos = CorePagos.ObtenerPagos(cmbNombres.SelectedItem.ToString());
-
-
-                frmviewer viewer = new frmviewer();
-                ReportDocument report = new ReportDocument();
-                ConnectionInfo iConnectionInfo = new ConnectionInfo();
-
-                /// Obteniendo informacion de la conexión a utilizar
-                iConnectionInfo.DatabaseName = "LuxurySAPB1";
-                iConnectionInfo.UserID = "sa";
-                iConnectionInfo.Password = "12";
-                iConnectionInfo.ServerName = "GERARDO-PC";
-
-                report.Load(System.IO.Directory.GetParent(Application.ExecutablePath).ToString() + @"\" +
-                    ("informe2.rpt"));
-
-                //reasignando datos de conexión a reporte 
-                SetDBLogonForReport(iConnectionInfo, report);
-
-                //Asignando parametros de reporte
-                // report.ParameterFields["DocEntry"].CurrentValues.AddValue("HOLA");
-
-                this.Cursor = Cursors.Default;
-                //mostrando reporte
-
-                viewer.crviewer.ReportSource = report;
-                try
-                {
-                    ExportOptions CrExportOptions;
-                    DiskFileDestinationOptions CrDiskFileDestinationOptions = new DiskFileDestinationOptions();
-                    PdfRtfWordFormatOptions CrFormatTypeOptions = new PdfRtfWordFormatOptions();
-                    CrDiskFileDestinationOptions.DiskFileName = ruta;
-                    CrExportOptions = report.ExportOptions;
-                    {
-                        CrExportOptions.ExportDestinationType = ExportDestinationType.DiskFile;
-                        CrExportOptions.ExportFormatType = ExportFormatType.PortableDocFormat;
-                        CrExportOptions.DestinationOptions = CrDiskFileDestinationOptions;
-                        CrExportOptions.FormatOptions = CrFormatTypeOptions;
-                    }
-                    report.Export();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.ToString());
-                }
-
-                Pagos = CorePagos.ObtenerPagos(cmbNombres.Text);
-            }
         }
 
         private void SetDBLogonForReport(ConnectionInfo myConnectionInfo, ReportDocument myReportDocument)
@@ -136,7 +75,70 @@ namespace PagosPDF
             }
         }
 
+        public void GeneraPDF(string ruta)
+        {
+            ReportDocument report = new ReportDocument();
+            ConnectionInfo iConnectionInfo = new ConnectionInfo();
 
+            /// Obteniendo informacion de la conexión a utilizar
+            iConnectionInfo.DatabaseName = "OceanSAP";// ConfigurationManager.AppSettings["BaseDatos"];
+            iConnectionInfo.UserID = ConfigurationManager.AppSettings["UsuarioBD"];
+            iConnectionInfo.Password = ConfigurationManager.AppSettings["PasswordBD"];
+            iConnectionInfo.ServerName = ConfigurationManager.AppSettings["Servidor"];
+
+            report.Load(System.IO.Directory.GetParent(Application.ExecutablePath).ToString() + @"\" +
+                ("20130917_RPTBALANZAPROVISIONAL.rpt"));
+
+            //reasignando datos de conexión a reporte 
+            SetDBLogonForReport(iConnectionInfo, report);
+
+            //Asignando parametros de reporte
+            report.ParameterFields["1FechaInicio"].CurrentValues.AddValue("15/07/2014");
+            report.ParameterFields["2FechaFin"].CurrentValues.AddValue("15/07/2014");
+
+            this.Cursor = Cursors.Default;
+            try
+            {
+                ExportOptions CrExportOptions;
+                DiskFileDestinationOptions CrDiskFileDestinationOptions = new DiskFileDestinationOptions();
+                PdfRtfWordFormatOptions CrFormatTypeOptions = new PdfRtfWordFormatOptions();
+                CrDiskFileDestinationOptions.DiskFileName = ruta;
+                CrExportOptions = report.ExportOptions;
+                {
+                    CrExportOptions.ExportDestinationType = ExportDestinationType.DiskFile;
+                    CrExportOptions.ExportFormatType = ExportFormatType.PortableDocFormat;
+                    CrExportOptions.DestinationOptions = CrDiskFileDestinationOptions;
+                    CrExportOptions.FormatOptions = CrFormatTypeOptions;
+                }
+                report.Export();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void btnGenerar_Click(object sender, EventArgs e)
+        {
+            string ruta;
+            SaveFileDialog save = new SaveFileDialog();
+            save.Filter = "PDF (*.pdf)|*.pdf";
+
+            if (save.ShowDialog() == DialogResult.OK && save.FileName.Length > 0)
+            {
+                ruta = save.FileName;
+
+                Pagos = CorePagos.ObtenerPagos(cmbNombres.Text);
+
+                GeneraPDF(ruta);
+            }
+        }
+
+        private void configuraciónToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            frmDBConfig VentanaDB = new frmDBConfig();
+            VentanaDB.ShowDialog();
+        }
     }
 }
 
