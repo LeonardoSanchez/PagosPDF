@@ -39,55 +39,64 @@ namespace PagosPDF
 
         private void btnGenerar_Click(object sender, EventArgs e)
         {
+            string ruta;
+            SaveFileDialog save = new SaveFileDialog();
+            save.Filter = "PDF (*.pdf)|*.pdf";
 
-            Pagos = CorePagos.ObtenerPagos(cmbNombres.SelectedItem.ToString());
-
-
-            frmviewer viewer = new frmviewer();
-            ReportDocument report = new ReportDocument();
-            ConnectionInfo iConnectionInfo = new ConnectionInfo();
-
-            /// Obteniendo informacion de la conexión a utilizar
-            iConnectionInfo.DatabaseName = "LuxurySAPB1";
-            iConnectionInfo.UserID = "sa";
-            iConnectionInfo.Password = "12";
-            iConnectionInfo.ServerName = "GERARDO-PC";
-
-            report.Load(System.IO.Directory.GetParent(Application.ExecutablePath).ToString() + @"\" +
-                ("informe2.rpt"));
-
-            //reasignando datos de conexión a reporte 
-            SetDBLogonForReport(iConnectionInfo, report);
-
-            //Asignando parametros de reporte
-           // report.ParameterFields["DocEntry"].CurrentValues.AddValue("HOLA");
-
-            this.Cursor = Cursors.Default;
-            //mostrando reporte
-
-            viewer.crviewer.ReportSource = report;
-            try
+            if (save.ShowDialog() == System.Windows.Forms.DialogResult.OK
+                && save.FileName.Length > 0)
             {
-                ExportOptions CrExportOptions;
-                DiskFileDestinationOptions CrDiskFileDestinationOptions = new DiskFileDestinationOptions();
-                PdfRtfWordFormatOptions CrFormatTypeOptions = new PdfRtfWordFormatOptions();
-                CrDiskFileDestinationOptions.DiskFileName = "c:/a/REPORTE.pdf";
-                CrExportOptions = report.ExportOptions;
+                ruta = (save.FileName);
+
+
+                Pagos = CorePagos.ObtenerPagos(cmbNombres.SelectedItem.ToString());
+
+
+                frmviewer viewer = new frmviewer();
+                ReportDocument report = new ReportDocument();
+                ConnectionInfo iConnectionInfo = new ConnectionInfo();
+
+                /// Obteniendo informacion de la conexión a utilizar
+                iConnectionInfo.DatabaseName = "LuxurySAPB1";
+                iConnectionInfo.UserID = "sa";
+                iConnectionInfo.Password = "12";
+                iConnectionInfo.ServerName = "GERARDO-PC";
+
+                report.Load(System.IO.Directory.GetParent(Application.ExecutablePath).ToString() + @"\" +
+                    ("informe2.rpt"));
+
+                //reasignando datos de conexión a reporte 
+                SetDBLogonForReport(iConnectionInfo, report);
+
+                //Asignando parametros de reporte
+                // report.ParameterFields["DocEntry"].CurrentValues.AddValue("HOLA");
+
+                this.Cursor = Cursors.Default;
+                //mostrando reporte
+
+                viewer.crviewer.ReportSource = report;
+                try
                 {
-                    CrExportOptions.ExportDestinationType = ExportDestinationType.DiskFile;
-                    CrExportOptions.ExportFormatType = ExportFormatType.PortableDocFormat;
-                    CrExportOptions.DestinationOptions = CrDiskFileDestinationOptions;
-                    CrExportOptions.FormatOptions = CrFormatTypeOptions;
+                    ExportOptions CrExportOptions;
+                    DiskFileDestinationOptions CrDiskFileDestinationOptions = new DiskFileDestinationOptions();
+                    PdfRtfWordFormatOptions CrFormatTypeOptions = new PdfRtfWordFormatOptions();
+                    CrDiskFileDestinationOptions.DiskFileName = ruta;
+                    CrExportOptions = report.ExportOptions;
+                    {
+                        CrExportOptions.ExportDestinationType = ExportDestinationType.DiskFile;
+                        CrExportOptions.ExportFormatType = ExportFormatType.PortableDocFormat;
+                        CrExportOptions.DestinationOptions = CrDiskFileDestinationOptions;
+                        CrExportOptions.FormatOptions = CrFormatTypeOptions;
+                    }
+                    report.Export();
                 }
-                report.Export();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
 
-            Pagos = CorePagos.ObtenerPagos(cmbNombres.Text);
-
+                Pagos = CorePagos.ObtenerPagos(cmbNombres.Text);
+            }
         }
 
         private void SetDBLogonForReport(ConnectionInfo myConnectionInfo, ReportDocument myReportDocument)

@@ -35,6 +35,7 @@
             this.menuPrincipal = new System.Windows.Forms.MenuStrip();
             this.opcionesItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnGenerar = new System.Windows.Forms.Button();
+            this.configuraciónToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuPrincipal.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -87,6 +88,8 @@
             // 
             // opcionesItem
             // 
+            this.opcionesItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.configuraciónToolStripMenuItem1});
             this.opcionesItem.Name = "opcionesItem";
             this.opcionesItem.Size = new System.Drawing.Size(69, 20);
             this.opcionesItem.Text = "Opciones";
@@ -100,6 +103,12 @@
             this.btnGenerar.Text = "Generar";
             this.btnGenerar.UseVisualStyleBackColor = true;
             this.btnGenerar.Click += new System.EventHandler(this.btnGenerar_Click);
+            // 
+            // configuraciónToolStripMenuItem1
+            // 
+            this.configuraciónToolStripMenuItem1.Name = "configuraciónToolStripMenuItem1";
+            this.configuraciónToolStripMenuItem1.Size = new System.Drawing.Size(168, 22);
+            this.configuraciónToolStripMenuItem1.Text = "Configuración";
             // 
             // frmPagos
             // 
@@ -133,6 +142,7 @@
         private System.Windows.Forms.MenuStrip menuPrincipal;
         private System.Windows.Forms.ToolStripMenuItem opcionesItem;
         private System.Windows.Forms.Button btnGenerar;
+        private System.Windows.Forms.ToolStripMenuItem configuraciónToolStripMenuItem1;
     }
 }
 
