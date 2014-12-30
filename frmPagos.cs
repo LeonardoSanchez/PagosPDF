@@ -37,15 +37,14 @@ namespace PagosPDF
 
         public void PrimeraEjecucion()
         {
-            string Ejecucion = ConfigurationManager.AppSettings["FirstTimeRunning"];
-            if(Ejecucion.Equals("Si"))
+            string Ejecucion = Properties.Settings.Default.PrimeraEjecucion;
+            if(Ejecucion.Equals("SI"))
             {
                 MessageBox.Show(this, "Favor de configurar los parámetros antes de usar la aplicación.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 frmDBConfig Pantalla = new frmDBConfig();
                 Pantalla.ShowDialog();
-                Configuration Config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-                Config.AppSettings.Settings["FirstTimeRunning"].Value = "No";
-                Config.Save(ConfigurationSaveMode.Modified);
+                Properties.Settings.Default.PrimeraEjecucion = "NO";
+                Properties.Settings.Default.Save();
             }
         }
 

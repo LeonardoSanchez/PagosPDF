@@ -22,5 +22,65 @@ namespace PagosPDF.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("SERVIDOR")]
+        public string Servidor {
+            get {
+                return ((string)(this["Servidor"]));
+            }
+            set {
+                this["Servidor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("BASE DE DATOS")]
+        public string BaseDatos {
+            get {
+                return ((string)(this["BaseDatos"]));
+            }
+            set {
+                this["BaseDatos"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("USUARIO DE BASE DE DATOS")]
+        public string UsuarioBD {
+            get {
+                return ((string)(this["UsuarioBD"]));
+            }
+            set {
+                this["UsuarioBD"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("CONTRASEÑA")]
+        public string PasswordBD {
+            get {
+                return ((string)(this["PasswordBD"]));
+            }
+            set {
+                this["PasswordBD"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("SI")]
+        public string PrimeraEjecucion {
+            get {
+                return ((string)(this["PrimeraEjecucion"]));
+            }
+            set {
+                this["PrimeraEjecucion"] = value;
+            }
+        }
     }
 }

@@ -29,10 +29,10 @@ namespace PagosPDF
 
         public void CargaParametros()
         {
-            txtServidor.Text = ConfigurationManager.AppSettings["Servidor"];
-            txtBD.Text = ConfigurationManager.AppSettings["BaseDatos"];
-            txtUsuario.Text = ConfigurationManager.AppSettings["UsuarioBD"];
-            txtPassword.Text = ConfigurationManager.AppSettings["PasswordBD"];
+            txtServidor.Text = Properties.Settings.Default.Servidor;
+            txtBD.Text = Properties.Settings.Default.BaseDatos;
+            txtUsuario.Text = Properties.Settings.Default.UsuarioBD;
+            txtPassword.Text = Properties.Settings.Default.PasswordBD;
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -71,12 +71,11 @@ namespace PagosPDF
 
         public void ActualizarParametros()
         {
-            Configuration Config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            Config.AppSettings.Settings["Servidor"].Value = txtServidor.Text;
-            Config.AppSettings.Settings["BaseDatos"].Value = txtBD.Text;
-            Config.AppSettings.Settings["UsuarioBD"].Value = txtUsuario.Text;
-            Config.AppSettings.Settings["PasswordBD"].Value = txtPassword.Text;
-            Config.Save(ConfigurationSaveMode.Modified);
+            Properties.Settings.Default.Servidor = txtServidor.Text;
+            Properties.Settings.Default.BaseDatos = txtBD.Text;
+            Properties.Settings.Default.UsuarioBD = txtUsuario.Text;
+            Properties.Settings.Default.PasswordBD = txtPassword.Text;
+            Properties.Settings.Default.Save();
             MessageBox.Show(this, "Configuración actualizada con exito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
