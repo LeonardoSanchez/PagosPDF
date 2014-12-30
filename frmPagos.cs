@@ -34,9 +34,21 @@ namespace PagosPDF
             cmbNombres.DataSource = CorePagos.ObtenerNombres(dtFecha.Text);
         }
 
+        public void PrimeraEjecucion()
+        {
+            string Ejecucion = ConfigurationManager.AppSettings["FirstTimeRunning"];
+            if(Ejecucion.Equals("Si"))
+            {
+                MessageBox.Show(this, "Favor de configurar los parámetros antes de usar la aplicación.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                frmDBConfig Pantalla = new frmDBConfig();
+                Pantalla.ShowDialog();
+            }
+        }
+
         private void frmPagos_Load(object sender, EventArgs e)
         {
             IniciaPantalla();
+            PrimeraEjecucion();
         }
 
         private void SetDBLogonForReport(ConnectionInfo myConnectionInfo, ReportDocument myReportDocument)
@@ -128,25 +140,21 @@ namespace PagosPDF
         {
             string ruta;
             FolderBrowserDialog browser = new FolderBrowserDialog();
-            if(browser.ShowDialog() == DialogResult.OK)
+            if (dgPagos.SelectedRows.Count > 0)
             {
-                ruta = browser.SelectedPath;
+                if (browser.ShowDialog() == DialogResult.OK)
+                {
+                    ruta = browser.SelectedPath;
 
-                Pagos = CorePagos.ObtenerPagos(cmbNombres.Text);
+                    Pagos = CorePagos.ObtenerPagos(cmbNombres.Text);
 
-                GeneraPDF(ruta);
+                    GeneraPDF(ruta);
+                }
             }
-            /*SaveFileDialog save = new SaveFileDialog();
-            save.Filter = "PDF (*.pdf)|*.pdf";
-
-            if (save.ShowDialog() == DialogResult.OK && save.FileName.Length > 0)
+            else
             {
-                ruta = save.FileName;
-
-                Pagos = CorePagos.ObtenerPagos(cmbNombres.Text);
-
-                GeneraPDF(ruta);
-            }*/
+                MessageBox.Show(this, "Favor de seleccionar al menos un pago.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void configuraciónToolStripMenuItem1_Click(object sender, EventArgs e)

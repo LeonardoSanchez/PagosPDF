@@ -40,10 +40,33 @@ namespace PagosPDF
             this.Dispose();
         }
 
+        public bool VerificarVacio(Form Formulario)
+        {
+            foreach(Control Objeto in Formulario.Controls)
+            {
+                if(Objeto is TextBox)
+                {
+                    TextBox txt = Objeto as TextBox;
+                    if(txt.Text == string.Empty)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            ActualizarParametros();
-            this.Dispose();
+            if(VerificarVacio(this))
+            {
+                MessageBox.Show(this, "Favor de no dejar campos vacíos.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                ActualizarParametros();
+                this.Dispose();
+            }
         }
 
         public void ActualizarParametros()
