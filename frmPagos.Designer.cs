@@ -37,6 +37,7 @@
             this.configuraciónToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.btnGenerar = new System.Windows.Forms.Button();
             this.dgPagos = new System.Windows.Forms.DataGridView();
+            this.checkTodos = new System.Windows.Forms.CheckBox();
             this.menuPrincipal.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgPagos)).BeginInit();
             this.SuspendLayout();
@@ -119,18 +120,30 @@
             this.dgPagos.AllowUserToAddRows = false;
             this.dgPagos.AllowUserToDeleteRows = false;
             this.dgPagos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgPagos.Location = new System.Drawing.Point(18, 102);
+            this.dgPagos.Location = new System.Drawing.Point(18, 124);
             this.dgPagos.Name = "dgPagos";
             this.dgPagos.ReadOnly = true;
             this.dgPagos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgPagos.Size = new System.Drawing.Size(344, 177);
+            this.dgPagos.Size = new System.Drawing.Size(344, 155);
             this.dgPagos.TabIndex = 6;
+            // 
+            // checkTodos
+            // 
+            this.checkTodos.AutoSize = true;
+            this.checkTodos.Location = new System.Drawing.Point(221, 101);
+            this.checkTodos.Name = "checkTodos";
+            this.checkTodos.Size = new System.Drawing.Size(141, 17);
+            this.checkTodos.TabIndex = 7;
+            this.checkTodos.Text = "Generar todos los pagos";
+            this.checkTodos.UseVisualStyleBackColor = true;
+            this.checkTodos.CheckedChanged += new System.EventHandler(this.checkTodos_CheckedChanged);
             // 
             // frmPagos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(381, 325);
+            this.Controls.Add(this.checkTodos);
             this.Controls.Add(this.dgPagos);
             this.Controls.Add(this.btnGenerar);
             this.Controls.Add(this.cmbNombres);
@@ -162,6 +175,7 @@
         private System.Windows.Forms.Button btnGenerar;
         private System.Windows.Forms.ToolStripMenuItem configuraciónToolStripMenuItem1;
         private System.Windows.Forms.DataGridView dgPagos;
+        private System.Windows.Forms.CheckBox checkTodos;
     }
 }
 

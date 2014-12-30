@@ -16,6 +16,7 @@ namespace PagosPDF
     {
         Pagos CorePagos = new Pagos();
         DataTable Pagos = new DataTable();
+        bool Todos = false;
 
         public frmPagos()
         {
@@ -88,50 +89,100 @@ namespace PagosPDF
             }
         }
 
-        public void GeneraPDF(string ruta)
+        public void GeneraPDF(string ruta, bool todos)
         {
-            foreach (DataGridViewRow Pago in dgPagos.SelectedRows)
+            if (todos)
             {
-                ReportDocument report = new ReportDocument();
-                ConnectionInfo iConnectionInfo = new ConnectionInfo();
-
-                /// Obteniendo informacion de la conexión a utilizar
-                iConnectionInfo.DatabaseName = ConfigurationManager.AppSettings["BaseDatos"];
-                iConnectionInfo.UserID = ConfigurationManager.AppSettings["UsuarioBD"];
-                iConnectionInfo.Password = ConfigurationManager.AppSettings["PasswordBD"];
-                iConnectionInfo.ServerName = ConfigurationManager.AppSettings["Servidor"];
-
-                report.Load(System.IO.Directory.GetParent(Application.ExecutablePath).ToString() + @"\" +
-                    ("PDF Pago.rpt"));
-                report.Refresh();
-
-                //reasignando datos de conexión a reporte 
-                SetDBLogonForReport(iConnectionInfo, report);
-
-                //Asignando parametros de reporte
-                int numPago = Convert.ToInt32(Pago.Cells["Num de Pago"].Value);
-                report.ParameterFields["npago"].CurrentValues.AddValue(numPago);
-
-
-                this.Cursor = Cursors.Default;
-                try
+                foreach (DataGridViewRow Pago in dgPagos.Rows)
                 {
-                    ExportOptions CrExportOptions;
-                    DiskFileDestinationOptions CrDiskFileDestinationOptions = new DiskFileDestinationOptions();
-                    PdfRtfWordFormatOptions CrFormatTypeOptions = new PdfRtfWordFormatOptions();
-                    CrDiskFileDestinationOptions.DiskFileName = ruta + "/" + numPago.ToString() + ".pdf";
-                    CrExportOptions = report.ExportOptions;
+                    ReportDocument report = new ReportDocument();
+                    ConnectionInfo iConnectionInfo = new ConnectionInfo();
+
+                    /// Obteniendo informacion de la conexión a utilizar
+                    iConnectionInfo.DatabaseName = ConfigurationManager.AppSettings["BaseDatos"];
+                    iConnectionInfo.UserID = ConfigurationManager.AppSettings["UsuarioBD"];
+                    iConnectionInfo.Password = ConfigurationManager.AppSettings["PasswordBD"];
+                    iConnectionInfo.ServerName = ConfigurationManager.AppSettings["Servidor"];
+
+                    report.Load(System.IO.Directory.GetParent(Application.ExecutablePath).ToString() + @"\" +
+                        ("PDF Pago.rpt"));
+                    report.Refresh();
+
+                    //reasignando datos de conexión a reporte 
+                    SetDBLogonForReport(iConnectionInfo, report);
+
+                    //Asignando parametros de reporte
+                    int numPago = Convert.ToInt32(Pago.Cells["Num de Pago"].Value);
+                    report.ParameterFields["npago"].CurrentValues.AddValue(numPago);
+
+
+                    this.Cursor = Cursors.Default;
+                    try
                     {
-                        CrExportOptions.ExportDestinationType = ExportDestinationType.DiskFile;
-                        CrExportOptions.ExportFormatType = ExportFormatType.PortableDocFormat;
-                        CrExportOptions.DestinationOptions = CrDiskFileDestinationOptions;
-                        CrExportOptions.FormatOptions = CrFormatTypeOptions;
+                        ExportOptions CrExportOptions;
+                        DiskFileDestinationOptions CrDiskFileDestinationOptions = new DiskFileDestinationOptions();
+                        PdfRtfWordFormatOptions CrFormatTypeOptions = new PdfRtfWordFormatOptions();
+                        CrDiskFileDestinationOptions.DiskFileName = ruta + "/" + numPago.ToString() + ".pdf";
+                        CrExportOptions = report.ExportOptions;
+                        {
+                            CrExportOptions.ExportDestinationType = ExportDestinationType.DiskFile;
+                            CrExportOptions.ExportFormatType = ExportFormatType.PortableDocFormat;
+                            CrExportOptions.DestinationOptions = CrDiskFileDestinationOptions;
+                            CrExportOptions.FormatOptions = CrFormatTypeOptions;
+                        }
+                        report.Export();
                     }
-                    report.Export();
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Fallo conexion con la base de datos", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
-                catch (Exception ex)
+            }
+            else
+            {
+                foreach (DataGridViewRow Pago in dgPagos.SelectedRows)
                 {
-                    MessageBox.Show("Fallo conexion con la base de datos","Aviso",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                    ReportDocument report = new ReportDocument();
+                    ConnectionInfo iConnectionInfo = new ConnectionInfo();
+
+                    /// Obteniendo informacion de la conexión a utilizar
+                    iConnectionInfo.DatabaseName = ConfigurationManager.AppSettings["BaseDatos"];
+                    iConnectionInfo.UserID = ConfigurationManager.AppSettings["UsuarioBD"];
+                    iConnectionInfo.Password = ConfigurationManager.AppSettings["PasswordBD"];
+                    iConnectionInfo.ServerName = ConfigurationManager.AppSettings["Servidor"];
+
+                    report.Load(System.IO.Directory.GetParent(Application.ExecutablePath).ToString() + @"\" +
+                        ("PDF Pago.rpt"));
+                    report.Refresh();
+
+                    //reasignando datos de conexión a reporte 
+                    SetDBLogonForReport(iConnectionInfo, report);
+
+                    //Asignando parametros de reporte
+                    int numPago = Convert.ToInt32(Pago.Cells["Num de Pago"].Value);
+                    report.ParameterFields["npago"].CurrentValues.AddValue(numPago);
+
+
+                    this.Cursor = Cursors.Default;
+                    try
+                    {
+                        ExportOptions CrExportOptions;
+                        DiskFileDestinationOptions CrDiskFileDestinationOptions = new DiskFileDestinationOptions();
+                        PdfRtfWordFormatOptions CrFormatTypeOptions = new PdfRtfWordFormatOptions();
+                        CrDiskFileDestinationOptions.DiskFileName = ruta + "/" + numPago.ToString() + ".pdf";
+                        CrExportOptions = report.ExportOptions;
+                        {
+                            CrExportOptions.ExportDestinationType = ExportDestinationType.DiskFile;
+                            CrExportOptions.ExportFormatType = ExportFormatType.PortableDocFormat;
+                            CrExportOptions.DestinationOptions = CrDiskFileDestinationOptions;
+                            CrExportOptions.FormatOptions = CrFormatTypeOptions;
+                        }
+                        report.Export();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Fallo conexion con la base de datos", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
         }
@@ -148,7 +199,7 @@ namespace PagosPDF
 
                     Pagos = CorePagos.ObtenerPagos(cmbNombres.Text);
 
-                    GeneraPDF(ruta);
+                    GeneraPDF(ruta, Todos);
                 }
             }
             else
@@ -166,6 +217,18 @@ namespace PagosPDF
         private void cmbNombres_SelectedIndexChanged(object sender, EventArgs e)
         {
             dgPagos.DataSource = CorePagos.ObtenerPagos(cmbNombres.Text);
+        }
+
+        private void checkTodos_CheckedChanged(object sender, EventArgs e)
+        {
+            if(checkTodos.Checked)
+            {
+                Todos = true;
+            }
+            else
+            {
+                Todos = false;
+            }
         }
     }
 }
