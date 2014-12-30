@@ -27,9 +27,9 @@ C:\Users\Gerardo\Desktop\PagosPDF\bin\Debug\PagosPDF.exe
 C:\Users\Gerardo\Desktop\PagosPDF\bin\Debug\PagosPDF.pdb
 C:\Users\Gerardo\Desktop\PagosPDF\obj\x86\Debug\PagosPDF.csprojResolveAssemblyReference.cache
 C:\Users\Gerardo\Desktop\PagosPDF\obj\x86\Debug\PagosPDF.frmPagos.resources
-C:\Users\Gerardo\Desktop\PagosPDF\obj\x86\Debug\PagosPDF.frmviewer.resources
 C:\Users\Gerardo\Desktop\PagosPDF\obj\x86\Debug\PagosPDF.Properties.Resources.resources
 C:\Users\Gerardo\Desktop\PagosPDF\obj\x86\Debug\PagosPDF.csproj.GenerateResource.Cache
 C:\Users\Gerardo\Desktop\PagosPDF\obj\x86\Debug\PagosPDF.exe
 C:\Users\Gerardo\Desktop\PagosPDF\obj\x86\Debug\PagosPDF.pdb
 C:\Users\Leonardo\Desktop\Parnet\PagosPDF\obj\x86\Debug\PagosPDF.frmDBConfig.resources
+C:\Users\Gerardo\Desktop\PagosPDF\obj\x86\Debug\PagosPDF.frmDBConfig.resources

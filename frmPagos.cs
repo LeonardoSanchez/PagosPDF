@@ -30,6 +30,7 @@ namespace PagosPDF
 
         private void dtFecha_ValueChanged(object sender, EventArgs e)
         {
+            dgPagos.DataSource = null;
             cmbNombres.DataSource = CorePagos.ObtenerNombres(dtFecha.Text);
         }
 
@@ -118,7 +119,7 @@ namespace PagosPDF
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.ToString());
+                    MessageBox.Show("Fallo conexion con la base de datos","Aviso",MessageBoxButtons.OK,MessageBoxIcon.Error);
                 }
             }
         }
