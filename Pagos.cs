@@ -33,7 +33,9 @@ namespace PagosPDF
 
         public DataTable ObtenerPagos(string Nombre)
         {
-            string Consulta = "SELECT DocEntry FROM OVPM WHERE Status = 'Y' AND JrnlMemo LIKE @Nombre";
+            string Consulta = 
+                @"SELECT DocEntry AS [Num de Pago], CardName AS [Proveedor],
+                    TrsfrSum AS [Total] FROM OVPM WHERE Status = 'Y' AND JrnlMemo LIKE @Nombre";
             DataTable DatosConsulta = new DataTable();
 
             using (SqlConnection Conexion = new SqlConnection(DatosConexion))
