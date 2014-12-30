@@ -43,6 +43,9 @@ namespace PagosPDF
                 MessageBox.Show(this, "Favor de configurar los parámetros antes de usar la aplicación.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 frmDBConfig Pantalla = new frmDBConfig();
                 Pantalla.ShowDialog();
+                Configuration Config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                Config.AppSettings.Settings["FirstTimeRunning"].Value = "No";
+                Config.Save(ConfigurationSaveMode.Modified);
             }
         }
 
