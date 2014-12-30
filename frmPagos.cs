@@ -101,10 +101,10 @@ namespace PagosPDF
                     ConnectionInfo iConnectionInfo = new ConnectionInfo();
 
                     /// Obteniendo informacion de la conexión a utilizar
-                    iConnectionInfo.DatabaseName = ConfigurationManager.AppSettings["BaseDatos"];
-                    iConnectionInfo.UserID = ConfigurationManager.AppSettings["UsuarioBD"];
-                    iConnectionInfo.Password = ConfigurationManager.AppSettings["PasswordBD"];
-                    iConnectionInfo.ServerName = ConfigurationManager.AppSettings["Servidor"];
+                    iConnectionInfo.DatabaseName = Properties.Settings.Default.BaseDatos;
+                    iConnectionInfo.UserID = Properties.Settings.Default.UsuarioBD;
+                    iConnectionInfo.Password = Properties.Settings.Default.PasswordBD;
+                    iConnectionInfo.ServerName = Properties.Settings.Default.Servidor;
 
                     report.Load(System.IO.Directory.GetParent(Application.ExecutablePath).ToString() + @"\" +
                         ("PDF Pago.rpt"));
@@ -148,10 +148,10 @@ namespace PagosPDF
                     ConnectionInfo iConnectionInfo = new ConnectionInfo();
 
                     /// Obteniendo informacion de la conexión a utilizar
-                    iConnectionInfo.DatabaseName = ConfigurationManager.AppSettings["BaseDatos"];
-                    iConnectionInfo.UserID = ConfigurationManager.AppSettings["UsuarioBD"];
-                    iConnectionInfo.Password = ConfigurationManager.AppSettings["PasswordBD"];
-                    iConnectionInfo.ServerName = ConfigurationManager.AppSettings["Servidor"];
+                    iConnectionInfo.DatabaseName = Properties.Settings.Default.BaseDatos;
+                    iConnectionInfo.UserID = Properties.Settings.Default.UsuarioBD;
+                    iConnectionInfo.Password = Properties.Settings.Default.PasswordBD;
+                    iConnectionInfo.ServerName = Properties.Settings.Default.Servidor;
 
                     report.Load(System.IO.Directory.GetParent(Application.ExecutablePath).ToString() + @"\" +
                         ("PDF Pago.rpt"));

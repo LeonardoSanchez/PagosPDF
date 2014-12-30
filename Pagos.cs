@@ -9,7 +9,7 @@ namespace PagosPDF
 {
     class Pagos
     {
-        string DatosConexion = "Data Source = localhost; Initial Catalog = LuxurySAPB1; Integrated Security = true;";
+        string DatosConexion = "Data Source = " + Properties.Settings.Default.Servidor + "; Initial Catalog = " + Properties.Settings.Default.BaseDatos + "; Integrated Security = true;";
 
         public DataTable ObtenerNombres(string Fecha)
         {
