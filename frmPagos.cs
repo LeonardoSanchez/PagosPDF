@@ -16,7 +16,7 @@ namespace PagosPDF
     {
         Pagos CorePagos = new Pagos();
         DataTable Pagos = new DataTable();
-        bool Todos = false;
+        bool Todos = false, Cargado = false;
 
         public frmPagos()
         {
@@ -25,33 +25,30 @@ namespace PagosPDF
 
         private void IniciaPantalla()
         {
-            cmbNombres.DataSource = CorePagos.ObtenerNombres(dtFecha.Text);
-            cmbNombres.DisplayMember = "WizardName";
-        }
-
-        private void dtFecha_ValueChanged(object sender, EventArgs e)
-        {
-            dgPagos.DataSource = null;
-            cmbNombres.DataSource = CorePagos.ObtenerNombres(dtFecha.Text);
-        }
-
-        public void PrimeraEjecucion()
-        {
-            string Ejecucion = Properties.Settings.Default.PrimeraEjecucion;
-            if(Ejecucion.Equals("SI"))
+            
+            if(Properties.Settings.Default.PrimeraEjecucion.Equals("SI"))
             {
                 MessageBox.Show(this, "Favor de configurar los parámetros antes de usar la aplicación.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 frmDBConfig Pantalla = new frmDBConfig();
                 Pantalla.ShowDialog();
-                Properties.Settings.Default.PrimeraEjecucion = "NO";
-                Properties.Settings.Default.Save();
             }
+            Cargado = true;
+        }
+
+        private void dtFecha_ValueChanged(object sender, EventArgs e)
+        {
+            if (Cargado)
+            {
+                dgPagos.DataSource = null;
+                cmbNombres.DataSource = CorePagos.ObtenerNombres(dtFecha.Text);
+                cmbNombres.DisplayMember = "WizardName";
+            }
+            checkTodos.Checked = false;
         }
 
         private void frmPagos_Load(object sender, EventArgs e)
         {
             IniciaPantalla();
-            PrimeraEjecucion();
         }
 
         private void SetDBLogonForReport(ConnectionInfo myConnectionInfo, ReportDocument myReportDocument)
@@ -93,6 +90,7 @@ namespace PagosPDF
 
         public void GeneraPDF(string ruta, bool todos)
         {
+            int Correctos = 0, Fallidos = 0;
             if (todos)
             {
                 foreach (DataGridViewRow Pago in dgPagos.Rows)
@@ -106,9 +104,16 @@ namespace PagosPDF
                     iConnectionInfo.Password = Properties.Settings.Default.PasswordBD;
                     iConnectionInfo.ServerName = Properties.Settings.Default.Servidor;
 
-                    report.Load(System.IO.Directory.GetParent(Application.ExecutablePath).ToString() + @"\" +
-                        ("PDF Pago.rpt"));
-                    report.Refresh();
+                    try
+                    {
+                        report.Load(System.IO.Directory.GetParent(Application.ExecutablePath).ToString() + @"\Reporte\PDF Pago.rpt");
+                        report.Refresh();
+                    }
+                    
+                    catch(Exception ex)
+                    {
+                        MessageBox.Show(this, "Error al cargar el reporte.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
 
                     //reasignando datos de conexión a reporte 
                     SetDBLogonForReport(iConnectionInfo, report);
@@ -133,10 +138,12 @@ namespace PagosPDF
                             CrExportOptions.FormatOptions = CrFormatTypeOptions;
                         }
                         report.Export();
+                        Correctos++;
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Fallo conexion con la base de datos", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(this, "Error al exportar PDF.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        Fallidos++;
                     }
                 }
             }
@@ -153,9 +160,16 @@ namespace PagosPDF
                     iConnectionInfo.Password = Properties.Settings.Default.PasswordBD;
                     iConnectionInfo.ServerName = Properties.Settings.Default.Servidor;
 
-                    report.Load(System.IO.Directory.GetParent(Application.ExecutablePath).ToString() + @"\" +
-                        ("PDF Pago.rpt"));
-                    report.Refresh();
+                    try
+                    {
+                        report.Load(System.IO.Directory.GetParent(Application.ExecutablePath).ToString() + @"\Reporte\PDF Pago.rpt");
+                        report.Refresh();
+                    }
+
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(this, "Error al cargar el reporte.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
 
                     //reasignando datos de conexión a reporte 
                     SetDBLogonForReport(iConnectionInfo, report);
@@ -180,33 +194,57 @@ namespace PagosPDF
                             CrExportOptions.FormatOptions = CrFormatTypeOptions;
                         }
                         report.Export();
+                        Correctos++;
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Fallo conexion con la base de datos", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(this, "Error al exportar PDF.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        Fallidos++;
                     }
                 }
             }
+            MessageBox.Show(this, "Exportación finalizada: Correctos: " + Correctos + " Fallidos: " + Fallidos, "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void btnGenerar_Click(object sender, EventArgs e)
         {
             string ruta;
             FolderBrowserDialog browser = new FolderBrowserDialog();
-            if (dgPagos.SelectedRows.Count > 0)
+            if (checkTodos.Checked)
             {
-                if (browser.ShowDialog() == DialogResult.OK)
+                if (dgPagos.Rows.Count > 0)
                 {
-                    ruta = browser.SelectedPath;
+                    if (browser.ShowDialog() == DialogResult.OK)
+                    {
+                        ruta = browser.SelectedPath;
 
-                    Pagos = CorePagos.ObtenerPagos(cmbNombres.Text);
+                        Pagos = CorePagos.ObtenerPagos(cmbNombres.Text);
 
-                    GeneraPDF(ruta, Todos);
+                        GeneraPDF(ruta, Todos);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(this, "No existen pagos en el asistente de pago seleccionado.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             else
             {
-                MessageBox.Show(this, "Favor de seleccionar al menos un pago.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                if (dgPagos.SelectedRows.Count > 0)
+                {
+                    if (browser.ShowDialog() == DialogResult.OK)
+                    {
+                        ruta = browser.SelectedPath;
+
+                        Pagos = CorePagos.ObtenerPagos(cmbNombres.Text);
+
+                        GeneraPDF(ruta, Todos);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(this, "Favor de seleccionar al menos un pago.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
         }
 
@@ -219,6 +257,7 @@ namespace PagosPDF
         private void cmbNombres_SelectedIndexChanged(object sender, EventArgs e)
         {
             dgPagos.DataSource = CorePagos.ObtenerPagos(cmbNombres.Text);
+            checkTodos.Checked = false;
         }
 
         private void checkTodos_CheckedChanged(object sender, EventArgs e)

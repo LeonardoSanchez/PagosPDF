@@ -75,6 +75,10 @@ namespace PagosPDF
             Properties.Settings.Default.BaseDatos = txtBD.Text;
             Properties.Settings.Default.UsuarioBD = txtUsuario.Text;
             Properties.Settings.Default.PasswordBD = txtPassword.Text;
+            if (Properties.Settings.Default.PrimeraEjecucion.Equals("SI"))
+            {
+                Properties.Settings.Default.PrimeraEjecucion = "NO";
+            }
             Properties.Settings.Default.Save();
             MessageBox.Show(this, "Configuración actualizada con exito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }

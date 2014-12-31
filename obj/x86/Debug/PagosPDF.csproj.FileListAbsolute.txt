@@ -33,3 +33,4 @@ C:\Users\Gerardo\Desktop\PagosPDF\obj\x86\Debug\PagosPDF.exe
 C:\Users\Gerardo\Desktop\PagosPDF\obj\x86\Debug\PagosPDF.pdb
 C:\Users\Leonardo\Desktop\Parnet\PagosPDF\obj\x86\Debug\PagosPDF.frmDBConfig.resources
 C:\Users\Gerardo\Desktop\PagosPDF\obj\x86\Debug\PagosPDF.frmDBConfig.resources
+C:\Users\Leonardo\Desktop\Parnet\PagosPDF\bin\Debug\Reporte\PDF Pago.rpt
